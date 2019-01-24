@@ -97,7 +97,7 @@ How do we print the bytes that make up that number?
 We print it char by char
 ```C
 int instruction = 3398041551;
-char c = instructiom >> 24;
+char c = instruction >> 24;
 cout << c;
 c = instruction >> 16;
 cout << c;
