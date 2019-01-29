@@ -57,11 +57,11 @@ top:
 ```
 **In Phase 1**:   
 we build a table like this:  
-| label | address |  
+| label | address |
 |---|---|
 |main|0x0|
 |top| 0xc|
-|beyond| 0x24|  
+|beyond| 0x24|
 ...
 
 **In Phase 2**:  
@@ -72,12 +72,12 @@ we build a table like this:
 so machine code is `0x1440fffb`  
 
 ---
-  
-| 6bits | 5bits | 5bits | 16bits (offset)|
-| ------ | ----- | ----- | ---------------- |  
-opcode|reg s| reg t|  
-`bne`| `$2`| `$0`| i = -5
-000101 | 00010| 00000|0xfffb
+
+| 6bits  | 5bits | 5bits | 16bits (offset) |
+| ------ | ----- | ----- | --------------- |
+| opcode | reg s | reg t |                 |
+| `bne`  | `$2`  | `$0`  | `i = -5`        |
+| 000101 | 00010 | 00000 | 0xfffb          |
 
 To put 000101 into first 6 bits, we need to append 26 zeros  
 in Racket: `(arithmetic-shift 5 -26)`  
