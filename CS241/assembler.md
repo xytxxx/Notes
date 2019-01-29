@@ -57,12 +57,12 @@ top:
 ```
 **In Phase 1**:   
 we build a table like this:  
-| label | address |
-|---|---|
-|main|0x0|
-|top| 0xc|
-|beyond| 0x24|
-...
+| label | address |  
+|------|------|  
+main|0x0  
+top| 0xc  
+beyond| 0x24      
+
 
 **In Phase 2**:  
 `lis $2` => `0x00001014`  
