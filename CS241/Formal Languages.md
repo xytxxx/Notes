@@ -14,8 +14,9 @@ translation to machine language is easy | usually 1 keyword is many machine lang
 
 **strings**: finite sequence of symbols
 
-**length of strings**: $|w| =$ number of chars in $w$ 
-*  $\epsilon  \text{ (empty string)} \notin \sum$,  $|\epsilon a \epsilon| = 1$ 
+**length of strings**: $|w| =​$ number of chars in $w​$ 
+
+*  $\epsilon  \text{ (empty string)} \notin \sum​$,  $|\epsilon a \epsilon| = 1​$ 
 
 **language**: set of strings. e.g. $\{a^{2n}b, n\geq0\}$, then $aaaab \in$ language. 
 
@@ -127,17 +128,15 @@ allows more than 1 translations for a symbol from the same state
 * but machine have to "guess" which choice to make
 
 So NFA is also $M = \{\sum, Q, q_0, A, \delta\}$, where  
-$\delta: (Q, \sum) \rightarrow \text{subset of } Q$
+$\delta: (Q, \sum) \rightarrow \text{subset of } Q$  
 
+$S^*​$ for NFAs: set of states $\times \sum \rightarrow ​$ set of states
 
+$S^*(q_s, \epsilon) = q_s​$   
 
-$S^*$ for NFAs: set of states $\times \sum \rightarrow $ set of states
+$S^*(q_s,  cw) =S^*((\cup_{q\in q_s} \delta(q, c) ), w)​$
 
-$S^*(q_s, \epsilon) = q_s$   
-
-$S^*(q_s,  cw) =S^*((\cup_{q\in q_s} \delta(q, c) ), w)$
-
-Accept w if $S^*(\{q_0\}, w) \cap A \neq \empty$    
+Accept w if $S^*(\{q_0\}, w) \cap A \neq \empty​$    
 
 Code:  
 
@@ -162,4 +161,80 @@ Simulate input `baabb`
 | baa        | {1,2} $\cup \empty$ = {1,2} |
 | baab       | {1,3}                       |
 | baabb      | {1,4}                       |
+
+Let's say $L = \{cab\} \cup \{\text{string with even number of a's}\}​$ then the NFA would be
+
+```mermaid
+graph LR
+1{1} --> |c| 2
+2 --> |a| 3
+3 --> |b| 4{4}
+1 --> |a| 5
+5 --> |a| 6{6}
+5 --> |b,c| 5
+6 --> |b,c| 6
+1 --> |b,c| 6
+
+```
+
+**Every DFA is an NFA**
+
+**Every NFA can be converted into DFA**
+
+![alt-text](https://g.gravizo.com/svg?
+digraph G {
+size ="4,4";
+1;
+1 -> 2 [label="epsilon"];
+1 -> 3 [label="epsilon"];}
+)
+
+This is an $\epsilon$-NFA.
+
+* used to glue stuff together.
+
+So another NFA for this L is
+
+![alt-text](https://g.gravizo.com/svg?
+digraph G {
+size ="4,4";
+1;}
+)
+
+## Epsilon-Closure
+
+$\epsilon​$-closure is all states that can be reached from current state without any input. 
+
+> Example: 
+
+![alt-text](https://g.gravizo.com/svg?
+digraph G {
+size ="4,4";
+1;
+1 -> 2[label="epsilon"]
+2 -> 3[label="epsilon"]})
+
+> $\epsilon$-closure(1) = {1,2,3}
+
+## Is C regular?
+
+C has:
+
+* keyword
+* identifiers
+* literals
+* operators
+* comments
+* puncturation
+
+sequence of these is a regular language
+
+Can use a finite automata to tokenize(scanning)
+
+We need: 
+
+* input string w (source code)
+* break w into tokens {$w_1,w_2, ..., w_n$} such that $w_c \in L$ where $L = $ {Valid C tokens} is regular
+
+
 
